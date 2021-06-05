@@ -1,9 +1,11 @@
-# Docker fsapi  (read: Cross feed)
-rest api to create dir in nfs volume
+# Docker fsapi  
+Rest api to create dir in nfs volume
 
-because you need to create directory first in nfs mount to connect it as docker volume 
+Because you need to create directory first in nfs mount to connect it as docker volume 
 
-## (re)author
+
+
+## Author
 Ph. Koenig - UnclePhil
 
 Made in Belgium, Europe, Earth 
@@ -20,8 +22,8 @@ docker pull unclephil/fsapi
 or clone this repo and build it on your infra
 
 ### Examples
-* docker-compose-yml for single docker 
-* docker-stack.yml for swarm cluster 
+* docker run -d -v ${PWD}/toto:/mnt -e FSAPI_ACTFS=/mnt -e FSAPI_PORT=8000 unclephil/fsapi
+* docker stack deploy -c exemple/docker-stack.yml 
 
 ### Environment variable
 * FSAPI_ACTFS    : the internal dir representing the nfs
@@ -36,14 +38,7 @@ or clone this repo and build it on your infra
 * /md/:dir : create dir 
 
 ## Todo
-* Theming 
-  * more than 1 theme by default
-  * ability to add personalized theme through volume mount or config
-* Evolution to ingress and proxy front-end 
-  * caddy combination maybe ?? ) 
-  * inner frame (cf home-assistant front-end)
-* Ability to show more than the local feed  (master mode)
-  * other xfeeder
-  * static json
-* more environment dynamic
-   no need to refresh to have the last list 
+* add subdir creation
+* add token security feature
+* add dir size calculation 
+ 
