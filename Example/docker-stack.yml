@@ -1,0 +1,13 @@
+version: '3'
+## this is a demo environment file for xfeed
+
+services:
+  fsapi:
+    image: unclephil/fsapi
+    ports:
+      - "8000:8000"
+    environment:
+      - FSAPI-ACTFS=/mnt
+      - FSAPI-PORT=8000
+    volumes:
+      - nfsvolumerootpath:/mnt

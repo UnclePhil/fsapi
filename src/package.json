@@ -1,0 +1,24 @@
+{
+  "name": "fsapi",
+  "version": "0.10.0",
+  "description": "HTTP endpoints for managing file system)",
+  "main": "app.js",
+  "scripts": {
+    "start": "node /app/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unclephil/fsapi.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/unclephil/fsapi/issues"
+  },
+  "homepage": "https://github.com/unclephil/fsapi#readme",
+  "dependencies": {
+    "console-server": "^1.0.9",
+    "restify": "^8.5.1"
+  }
+}
