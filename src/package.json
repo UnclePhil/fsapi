@@ -19,6 +19,7 @@
   "homepage": "https://github.com/unclephil/fsapi#readme",
   "dependencies": {
     "console-server": "^1.0.9",
+    "fs-extra": "^10.0.0",
     "restify": "^8.5.1"
   }
 }
