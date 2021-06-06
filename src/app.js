@@ -8,9 +8,9 @@ const DEBUG = true
 
 // application config
 
-
 const ACTFS = process.env.FSAPI_FS || 'test';
 const PORT = process.env.FSAPI_PORT || 8000 ;
+const TOKEN = process.env.FSAPI_MDTOKEN || "ThisIStheDEFaultMDToken" ;
 const BUILD = process.env.BUILD || "Unknow"
 
 // application infos 
@@ -79,18 +79,24 @@ function api_exist(req, res, next) {
 function api_md(req, res, next) {
   logreq(req);
   const rdir= req.query.dir || ""
+  const token =req.query.token || ""
   const ndir = path.join(ACTFS, rdir);
     try {
-    if (!fs.existsSync(ndir)) {
-      fs.mkdirSync(ndir, {
-        recursive: true
-      });
-      res.send({"action":"md","dir":rdir,"exist":true, "created":true})
-    }
-    else {
-      res.status(404)
-      res.send({"action":"md","dir":rdir,"exist":true, "created":false})
-    }
+      if(tk==TOKEN){
+        if (!fs.existsSync(ndir)) {
+        fs.mkdirSync(ndir, {
+          recursive: true
+        });
+        res.send({"action":"md","dir":rdir,"exist":true, "created":true})
+        }
+        else {
+          res.status(404)
+          res.send({"action":"md","dir":rdir,"exist":true, "created":false})
+        }
+      } else {
+        res.status(403)
+          res.send({"action":"md","dir":rdir,"exist":unknow, "msg":"Not Authorized"})
+      }
   } catch(e) {
     logger.error("MD An error occurred: "+e)
     res.status(500)
@@ -117,7 +123,6 @@ server.pre(restify.plugins.pre.sanitizePath());
 
 server.get('/', infos);
 server.get('/ls', api_ls);
-//server.get('/ls/:dir', api_ls);
 server.get('/ex', api_exist)
 server.post('/md', api_md);
 
