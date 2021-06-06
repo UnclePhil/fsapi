@@ -33,12 +33,11 @@ or clone this repo and build it on your infra
 ### Endpoints
 
 * /        : return info on container (health) 
-* /ls/:dir : return the contents of dir
-* /ex/:dir : check if dir exist 200:0O 404:NOK
-* /md/:dir : create dir 
+* /ls/?dir=new/dir/list : return the contents of dir (only directories)
+* /ex/?dir=?dir=new/dir/list : check if dir exist 200:0O 404:NOK
+* /md/?dir?dir=new/dir/list?token=thegoodtoken : create dir, if you have the good token 200:OK 403:not authorized 
 
 ## Todo
-* add subdir creation
-* add token security feature
+* add rm dir
 * add dir size calculation 
  
