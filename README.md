@@ -31,13 +31,21 @@ or clone this repo and build it on your infra
 
 
 ### Endpoints
+|method|url|description
+|---|---|---
+|GET | /   |return info on container (health) 
+|GET | /ls/?dir=new/dir/list | return the contents of dir (only directories) 200:0K 404 NOK  
+|GET | /ex/?dir=?dir=new/dir/list | check if dir exist 200:0O 404:NOK
+|POST| /md/?dir?dir=new/dir/list?token=thegoodmdtoken | create dir, if you have the good token 200:OK 403:not authorized 
 
-* /        : return info on container (health) 
-* /ls/?dir=new/dir/list : return the contents of dir (only directories)
-* /ex/?dir=?dir=new/dir/list : check if dir exist 200:0O 404:NOK
-* /md/?dir?dir=new/dir/list?token=thegoodtoken : create dir, if you have the good token 200:OK 403:not authorized 
+
+
+## history
+* 2021/06/06: transform rest in query param, add MDtoken
+* 2021/06/01: create source full rest  mode
+
 
 ## Todo
-* add rm dir
+* add rm dir & rm token
 * add dir size calculation 
  

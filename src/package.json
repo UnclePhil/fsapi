@@ -1,7 +1,7 @@
 {
   "name": "fsapi",
-  "version": "0.10.0",
-  "description": "HTTP endpoints for managing file system)",
+  "version": "1.0.0",
+  "description": "HTTP endpoints for managing directories in file system)",
   "main": "app.js",
   "scripts": {
     "start": "node /app/app.js",
@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/unclephil/fsapi.git"
   },
-  "author": "",
+  "author": "Ph Koenig",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/unclephil/fsapi/issues"
