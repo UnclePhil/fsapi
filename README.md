@@ -35,8 +35,9 @@ or clone this repo and build it on your infra
 |---|---|---
 |GET | /   |return info on container (health) 
 |GET | /ls/?dir=new/dir/list | return the contents of dir (only directories) 200:0K 404 NOK  
-|GET | /ex/?dir=?dir=new/dir/list | check if dir exist 200:0O 404:NOK
-|POST| /md/?dir?dir=new/dir/list?token=thegoodmdtoken | create dir, if you have the good token 200:OK 403:not authorized 
+|GET | /ex/?dir=new/dir/list | check if dir exist 200:0O 404:NOK
+|POST| /md/?dir=new/dir/list?token=thegood_mdtoken | create list in /new/dir  or the full path , if you have the good token 200:OK 403:not authorized 
+|DELETE| /rm/?dir=new/dir/list?token=thegood_rmtoken | delete list in /new/dir,  if you have the good token 200:OK 403:not authorized 
 
 
 
