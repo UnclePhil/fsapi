@@ -57,29 +57,29 @@ function api_ls(req, res, next) {
 }
 
 //=== EXIST ===============================
-function api_exist(req, res, next) {
-  logreq(req);
-  var resp = {}
-  const rdir= req.getPath() || ""
-  const ndir = path.join(ACTFS, rdir);
-  try {
-    if (fs.existsSync(ndir) ) {
-      resp = {"action":"ex","dir":rdir,"exist":true}
-      res.send(resp);
-    } else {
-      resp = {"action":"ex","dir":rdir,"exist":false}
-      res.status(404)
-      res.send(resp);
-    }
+// function api_exist(req, res, next) {
+//   logreq(req);
+//   var resp = {}
+//   const rdir= req.getPath() || ""
+//   const ndir = path.join(ACTFS, rdir);
+//   try {
+//     if (fs.existsSync(ndir) ) {
+//       resp = {"action":"ex","dir":rdir,"exist":true}
+//       res.send(resp);
+//     } else {
+//       resp = {"action":"ex","dir":rdir,"exist":false}
+//       res.status(404)
+//       res.send(resp);
+//     }
     
-  } catch(e) {
-    logger.error("EXIST An error occurred: "+ e)
-    res.status(500)
-    res.send('Uncontrolled error occurred - exist');
-  }
+//   } catch(e) {
+//     logger.error("EXIST An error occurred: "+ e)
+//     res.status(500)
+//     res.send('Uncontrolled error occurred - exist');
+//   }
 
-  next();
-}
+//   next();
+// }
 
 //=== MKDIR ===============================
 function api_md(req, res, next) {
