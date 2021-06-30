@@ -34,7 +34,6 @@ or clone this repo and build it on your infra
 ## Endpoints
 |method|curl sample|description
 |---|---|---
-
 |GET | curl --request GET --url http://localhost:8000/new/dir/list  | return the contents of directory /new/dir/list (only directories) 200:0K 404 NOK  
 |POST| curl --request POST --url http://localhost:8000/new/dir/list --header 'token: GoodTokenMD' | create /new/dir/list and full path if needed, if you have the good token 200:OK 403:not authorized 
 |DELETE| curl --request DELETE --url http://localhost:8000/new/dir --header 'token: GoodTokenRM' | remove /new/dir and all it's contents, if you have the good token 200:OK 403:not authorized
