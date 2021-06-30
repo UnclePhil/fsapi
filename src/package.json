@@ -1,7 +1,7 @@
 {
   "name": "fsapi",
-  "version": "1.0.0",
-  "description": "HTTP endpoints for managing directories in file system)",
+  "version": "2.0.0",
+  "description": "HTTP REST endpoints for managing directories in file system)",
   "main": "app.js",
   "scripts": {
     "start": "node /app/app.js",
@@ -20,6 +20,7 @@
   "dependencies": {
     "console-server": "^1.0.9",
     "fs-extra": "^10.0.0",
-    "restify": "^8.5.1"
+    "restify": "^8.5.1",
+    "rimraf": "^3.0.2"
   }
 }

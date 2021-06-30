@@ -1,13 +1,46 @@
-version: '3'
-## this is a demo environment file for xfeed
+version: '3.7'
+## this is a demo environment file for fsapi
+## You can use a secret for configuration purpose in ./config/config.js
+
 
 services:
   fsapi:
     image: unclephil/fsapi
+    networks:
+      - proxy
     ports:
-      - "8000:8000"
-    environment:
-      - FSAPI-ACTFS=/mnt
-      - FSAPI-PORT=8000
+      - "28888:8000"
+    secrets:
+      - source: config
+      - target: /app/config/config.js
     volumes:
-      - nfsvolumerootpath:/mnt
+      - localnfs:/mnt
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==manager
+      labels:
+        - caddy=http://fsapi.${CLUSTER_DOMAIN}
+        - caddy.reverse_proxy={{upstreams 28888}}
+        - caddy.encode=gzip
+      resources:
+        limits:
+          memory: 128M
+        reservations:
+          memory: 64M
+
+volumes:
+  localnfs:
+    driver_opts:
+      type: "nfs"
+      o: "addr=nfsserver,rw,nfsvers=3,nolock,soft,exec"
+      device: ":/mnt/data/docker/nfsvol"
+
+networks:
+  proxy:
+    external: true
+
+secrets:
+  config: 
+    file: ./config/config.js
