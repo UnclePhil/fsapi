@@ -1,4 +1,5 @@
-FROM node:14.13-alpine3.12
+FROM node:current-alpine
+
 
 ARG build_arg="-"
 

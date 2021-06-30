@@ -23,30 +23,38 @@ or clone this repo and build it on your infra
 
 ### Examples
 * docker run -d -v ${PWD}/toto:/mnt -e FSAPI_ACTFS=/mnt -e FSAPI_PORT=8000 unclephil/fsapi
-* docker stack deploy -c exemple/docker-stack.yml 
+* docker stack deploy -c exemple/docker-stack.yml, you can use a swarm secret to replace ./config/config.js  
 
 ### Environment variable
-* FSAPI_ACTFS    : the internal dir representing the nfs
-* FSAPI_PORT     : Server listen port (default 8000) 
+* FSAPI_FS    : the internal dir representing the nfs
+* FSAPI_PORT     : Server listen port (default 8000)
+* FSAPI_MDTOKEN  : the valid md token who must be long and maybe in a secret
 
 
-### Endpoints
-|method|url|description
+## Endpoints
+|method|curl sample|description
 |---|---|---
-|GET | /   |return info on container (health) 
-|GET | /ls/?dir=new/dir/list | return the contents of dir (only directories) 200:0K 404 NOK  
-|GET | /ex/?dir=new/dir/list | check if dir exist 200:0O 404:NOK
-|POST| /md/?dir=new/dir/list?token=thegood_mdtoken | create list in /new/dir  or the full path , if you have the good token 200:OK 403:not authorized 
-|DELETE| /rm/?dir=new/dir/list?token=thegood_rmtoken | delete list in /new/dir,  if you have the good token 200:OK 403:not authorized 
+
+|GET | curl --request GET --url http://localhost:8000/new/dir/list  | return the contents of directory /new/dir/list (only directories) 200:0K 404 NOK  
+|POST| curl --request POST --url http://localhost:8000/new/dir/list --header 'token: GoodTokenMD' | create /new/dir/list and full path if needed, if you have the good token 200:OK 403:not authorized 
+|DELETE| curl --request DELETE --url http://localhost:8000/new/dir --header 'token: GoodTokenRM' | remove /new/dir and all it's contents, if you have the good token 200:OK 403:not authorized
+
+### tips
+You cannot remove the root dir  (/)  
 
 
-
-## history
-* 2021/06/06: transform rest in query param, add MDtoken
-* 2021/06/01: create source full rest  mode
+## History
+* 2021/06/30:
+ * real rest format
+ * remove "infos" (for the moment)
+ * remove "exist" , ls reply 200 if exist 
+* 2021/06/06: 
+ * transform rest in query param, add MDtoken
+ * add rm dir & rm token
+ * transform ENV var in config file, for secret usage in swarm  
+* 2021/06/01: 
+ * create source bad rest mode
 
 
 ## Todo
-* add rm dir & rm token
 * add dir size calculation 
- 
