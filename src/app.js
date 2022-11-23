@@ -12,10 +12,11 @@ const DEBUG = true
 const cfg = require('./config/config.js')
 
 // apply  
-const ACTFS = cfg.actfs;
-const PORT = cfg.port
-const MDTOKEN = cfg.mdtoken ;
-const RMTOKEN = cfg.rmtoken ;
+const ACTFS = cfg.actfs;   // mount point 
+const PORT = cfg.port;     // api port 
+const FSMODE =cfg.fsmode;  //default access rights
+const MDTOKEN = cfg.mdtoken ;   // creation token
+const RMTOKEN = cfg.rmtoken ;   // delete token
 
 const BUILD = process.env.BUILD || "Unknow"
 
@@ -91,7 +92,8 @@ function api_md(req, res, next) {
       if(tk == MDTOKEN){
         if (!fs.existsSync(ndir)) {
         fs.mkdirSync(ndir, {
-          recursive: true
+          recursive: true,
+          mode: FSMODE
         });
         res.send({"action":"md","dir":rdir,"exist":true, "created":true})
         }
