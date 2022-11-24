@@ -1,6 +1,13 @@
 "use strict";
 process.EventEmitter = require('events').EventEmitter; 
-const logger = require('console-server');
+
+//import console from "console-server";
+//import fs from "fs-extra";
+//import rimraf from "rimraf";
+//import restify from "restify";
+//import path from "path"
+
+//const console = require('console-server');
 const fs = require('fs-extra')
 const rimraf = require('rimraf')
 const restify = require('restify');
@@ -50,7 +57,7 @@ function api_ls(req, res, next) {
       res.send({"action":"ls","dir":rdir,"exist":false});
     }
   } catch(e) {
-    logger.error("MD An error occurred: "+e)
+    console.error("MD An error occurred: "+e)
     res.status(500)
     res.send('Uncontrolled error occurred - ls');
   }  
@@ -74,7 +81,7 @@ function api_ls(req, res, next) {
 //     }
     
 //   } catch(e) {
-//     logger.error("EXIST An error occurred: "+ e)
+//     console.error("EXIST An error occurred: "+ e)
 //     res.status(500)
 //     res.send('Uncontrolled error occurred - exist');
 //   }
@@ -102,12 +109,12 @@ function api_md(req, res, next) {
           res.send({"action":"md","dir":rdir,"exist":true, "created":false})
         }
       } else {
-        logger.warn("HACKING with token: "+tk) 
+        console.warn("HACKING with token: "+tk) 
         res.status(403)
         res.send({"action":"md","dir":rdir,"exist":"unknow", "msg":"Not Authorized"})
       }
   } catch(e) {
-    logger.error("MD An error occurred: "+e)
+    console.error("MD An error occurred: "+e)
     res.status(500)
     res.send('Uncontrolled error occurred - md');
   }  
@@ -137,12 +144,12 @@ function api_rm(req, res, next) {
           res.send({"action":"rm","dir":rdir,"exist":true,"removed":false})
         }
       } else {
-        logger.warn("HACKING with token: "+tk) 
+        console.warn("HACKING with token: "+tk) 
         res.status(403)
         res.send({"action":"rm","dir":rdir,"exist":"unknow", "msg":"Not Authorized"})
       }
   } catch(e) {
-    logger.error("RM An error occurred: "+e)
+    console.error("RM An error occurred: "+e)
     res.status(500)
     res.send('Uncontrolled error occurred - rm');
   }  
@@ -151,15 +158,16 @@ function api_rm(req, res, next) {
 
 // == function error mgt ==
 function logerror(req, res, err, callback) {
-  logger.error(err.name,err.message)
+  console.error(err.name,err.message)
   callback();
 }
 
 function logreq(req) {
-  logger.info(req.connection.remoteAddress,req.method,req.headers.host,req.url,req.userAgent())
+  console.info(req.connection.remoteAddress,req.method,req.headers.host,req.url,req.userAgent())
 }
 
 /// == ROUTES =================================================================================
+process.umask(0)
 var server = restify.createServer();
 server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
@@ -172,7 +180,7 @@ server.post('/*', api_md);
 server.del('/*', api_rm);
 
 server.listen(PORT, function() {
-  logger.info('fsapi listening :', server.url,'build :', BUILD,'Fs', cfg.actfs ,'tokens', cfg.mdtoken.substr(-5), cfg.rmtoken.substr(-5));
+  console.info('fsapi listening :', server.url,'build :', BUILD,'Fs', cfg.actfs ,'tokens', cfg.mdtoken.substr(-5), cfg.rmtoken.substr(-5));
 });
 
 server.on('restifyError', logerror);

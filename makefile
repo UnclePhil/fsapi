@@ -67,8 +67,6 @@ tag-version: ## Generate container `latest` tag
 	@echo 'create tag $(RVERSION)'
 	docker tag $(APP_NAME) $(DREPO)/$(APP_NAME):$(RVERSION)
 
-
-
 # login to docker hub
 repo-login: 
 	cat $(dckpw)| docker login -u $(DUSER) --password-stdin
