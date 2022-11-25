@@ -17,10 +17,12 @@ services:
       - localnfs:/mnt
     deploy:
       replicas: 1
+      ## not mandatory, but more simple
       placement:
         constraints:
           - node.role==manager
       labels:
+        ## for my caddy ingress usage
         - caddy=http://fsapi.${CLUSTER_DOMAIN}
         - caddy.reverse_proxy={{upstreams 28888}}
         - caddy.encode=gzip

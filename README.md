@@ -1,4 +1,6 @@
 # Docker fsapi  
+
+
 Rest api to create dir in nfs volume
 
 Because you need to create directory first in nfs mount to connect it as docker volume 
@@ -22,13 +24,8 @@ docker pull unclephil/fsapi
 or clone this repo and build it on your infra
 
 ### Examples
-* docker run -d -v ${PWD}/toto:/mnt -e FSAPI_ACTFS=/mnt -e FSAPI_PORT=8000 unclephil/fsapi
+* docker run -d -v ${PWD}/toto:/mnt -v ./config/config.js:/app/config/config.js unclephil/fsapi
 * docker stack deploy -c exemple/docker-stack.yml, you can use a swarm secret to replace ./config/config.js  
-
-### Environment variable
-* FSAPI_FS    : the internal dir representing the nfs
-* FSAPI_PORT     : Server listen port (default 8000)
-* FSAPI_MDTOKEN  : the valid md token who must be long and maybe in a secret
 
 
 ## Endpoints
@@ -43,14 +40,21 @@ You cannot remove the root dir  (/)
 
 
 ## History
-* 2021/06/30:
+* 2022/11/24  V:2.0.1
+  * remove Env Var, change into config file
+  * allow mode in directory creation (default: 0777)
+  * add token for create and delete operation
+
+* 2021/06/30: :V:1.0.0
  * real rest format
  * remove "infos" (for the moment)
  * remove "exist" , ls reply 200 if exist 
+
 * 2021/06/06: 
  * transform rest in query param, add MDtoken
  * add rm dir & rm token
  * transform ENV var in config file, for secret usage in swarm  
+
 * 2021/06/01: 
  * create source bad rest mode
 

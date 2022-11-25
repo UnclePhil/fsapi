@@ -19,11 +19,11 @@ const DEBUG = true
 const cfg = require('./config/config.js')
 
 // apply  
-const ACTFS = cfg.actfs;   // mount point 
-const PORT = cfg.port;     // api port 
-const FSMODE =cfg.fsmode;  //default access rights
-const MDTOKEN = cfg.mdtoken ;   // creation token
-const RMTOKEN = cfg.rmtoken ;   // delete token
+const ACTFS = cfg.actfs || "/mnt";   // mount point 
+const PORT = cfg.port || 8000 ;     // api port 
+const FSMODE =cfg.fsmode || "0777";  //default access rights
+const MDTOKEN = cfg.mdtoken || "TheDefaultTokenMD";   // creation token
+const RMTOKEN = cfg.rmtoken || "TheDefaultTokenRM";   // delete token
 
 const BUILD = process.env.BUILD || "Unknow"
 
