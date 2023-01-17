@@ -50,6 +50,7 @@ function api_ls(req, res, next) {
   try {
     if (fs.existsSync(ndir)) {
       files=fs.readdirSync(ndir, { withFileTypes: true }).filter(dirent => dirent.isDirectory()).map(dirent => dirent.name)
+      res.status(200)
       res.send({"action":"ls","dir":rdir,"exist":true,"content":files});
     }
     else {
@@ -102,6 +103,7 @@ function api_md(req, res, next) {
           recursive: true,
           mode: FSMODE
         });
+        res.status(200)
         res.send({"action":"md","dir":rdir,"exist":true, "created":true})
         }
         else {
@@ -134,6 +136,7 @@ function api_rm(req, res, next) {
           // avoid remove of ACTFS main dir 
           if (rmdir != ACTFS) {
             rimraf.sync(rmdir)
+            res.status(200)
             res.send({"action":"rm","dir":rdir,"exist":true, "removed":true})
           } else {
             res.status(403)
