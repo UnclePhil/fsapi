@@ -6,6 +6,7 @@ config.actfs   = "/mnt"
 config.fsmode = '0777'
 
 // security implementation
+config.notoken = false;
 config.mdtoken = "TheDefaultTokenMD";
 config.rmtoken = "TheDefaultTokenRM";
 

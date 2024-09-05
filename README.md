@@ -40,6 +40,9 @@ You cannot remove the root dir  (/)
 
 
 ## History
+* 2024/09/05 V3.0.0
+  - major change : ability to set a "notoken" config variable who's avoiding the creation token 
+
 * 2022/11/24  V:2.0.1
   * remove Env Var, change into config file
   * allow mode in directory creation (default: 0777)

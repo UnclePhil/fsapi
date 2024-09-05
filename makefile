@@ -13,7 +13,8 @@ export $(shell sed 's/=.*//' $(dpl))
 
 # get the version from the date/time
 MOMENT=$(shell date '+%Y%m%d%H%M')
-BUILD=${VERSION}-${MOMENT}
+# BUILD=${VERSION}-${MOMENT}
+BUILD=${VERSION}
 
 # HELP
 # This will output the help for each task

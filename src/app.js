@@ -21,7 +21,8 @@ const cfg = require('./config/config.js')
 // apply  
 const ACTFS = cfg.actfs || "/mnt";   // mount point 
 const PORT = cfg.port || 8000 ;     // api port 
-const FSMODE =cfg.fsmode || "0777";  //default access rights
+const FSMODE = cfg.fsmode || "0777";  //default access rights
+const NOTOKEN = cfg.notoken || false; // do not use token for create
 const MDTOKEN = cfg.mdtoken || "TheDefaultTokenMD";   // creation token
 const RMTOKEN = cfg.rmtoken || "TheDefaultTokenRM";   // delete token
 
@@ -97,7 +98,7 @@ function api_md(req, res, next) {
   const tk = req.headers.token || ""
   const ndir = path.join(ACTFS, rdir);
     try {
-      if(tk == MDTOKEN){
+      if((tk == MDTOKEN) || (NOTOKEN)){
         if (!fs.existsSync(ndir)) {
         fs.mkdirSync(ndir, {
           recursive: true,
